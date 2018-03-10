@@ -1,6 +1,23 @@
 .container {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.img1 { 
+  width: 50%;
+}
+
+.img2 {
+  width: 50%;
+}
+
+.score-panel1 {
+  text-align: center;
+}
+
+.score-panel2 {
+  text-align: center;
 }
