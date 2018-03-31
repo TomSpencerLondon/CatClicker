@@ -1,5 +1,6 @@
 var model = {
   currentCat: null, 
+  adminShow: false, //hides the admin display area.
   cats: [
     {
       clickCount: 0, 
@@ -37,7 +38,10 @@ var octopus = {
     //initialize the view
     catListView.init(); 
     catView.init(); 
+    adminView.init();
+    adminView.hide();
   }, 
+
   getCurrentCat: function() {
     return model.currentCat;
   }, 
@@ -52,6 +56,32 @@ var octopus = {
   incrementCounter: function(){
     model.currentCat.clickCount++; 
     catView.render(); 
+  },
+
+  //function runs when 'Admin' button is clicked
+  adminDisplay: function(){
+    if(model.adminShow === false) {
+      model.adminShow = true; 
+      adminView.show(); //displays the admin input boxes and buttons
+    }
+    else if(model.adminShow === true) {
+      model.adminShow = false; 
+      adminView.hide(); //hides the admin input boxes and buttons
+    }
+  }, 
+  //hides admins display when cancel button is clicked. 
+  adminCancel: function(){
+    adminView.hide();
+  }, 
+
+  //hides admin display and saves new cat data when save button is clicked. 
+  adminSave: function(){
+    model.currentCat.name = adminCatName.value;
+    model.currentCat.imgSrc = adminCatURL.value; 
+    model.currentCat.clickCount = adminCatClicks.value; 
+    catView.render();
+    catListView.render();
+    adminView.hide();
   }
 };
 
@@ -117,6 +147,51 @@ var catView = {
         this.catListElem.appendChild(elem); 
 
       }
+    }
+  };
+
+  var adminView = {
+    init: function(){
+      this.adminCatName = document.getElementById("adminCatName");
+      this.adminCatURL = document.getElementById("adminCatURL"); 
+      this.adminCatClicks = document.getElementById("adminCatClicks");
+      var admin = document.getElementById("admin");
+
+      this.adminBtn = document.getElementById("adminBtn");
+      this.adminCancel = document.getElementById("adminCancel");
+      this.adminSave = document.getElementById("adminSave");
+
+      this.adminBtn.addEventListener('click', function(){
+        //shows the admin display
+        octopus.adminDisplay();
+      });
+
+      this.adminCancel.addEventListener('click', function(){
+        //hides the admin display without saving any new cat data
+        octopus.adminCancel();
+      });
+
+      this.adminSave.addEventListener('click', function(){
+        //hides the admin display and saves new cat data
+        octopus.adminSave(); 
+      });
+
+      this.render(); 
+    }, 
+
+    render: function(){
+      var currentCat = octopus.getCurrentCat(); 
+      this.adminCatName.value = currentCat.name; 
+      this.adminCatURL.value = currentCat.imgSrc; 
+      this.adminCatClicks.value = currentCat.clickCount; 
+    },
+
+    show: function(){
+      admin.style.display = 'block';
+    }, 
+
+    hide: function(){
+      admin.style.display = 'none';
     }
   };
 
