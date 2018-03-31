@@ -1,34 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Kelsey's Cat Clicker App</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+    <meta charset="UTF-8">
+<title>Cat Clicker App</title>
+<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
 
-<div class= 'container'>
-    <div class= 'header'>
-        <h1>Kelsey's Cat Clicker</h1>
-            <p>Click on the cat's name to display the cat's image.</p>
+    <ul id="cat-list"></ul>
+    <div id="cat">
+        <h2 id="cat-name"></h2>
+        <div id="cat-count"></div>
+        <img id="cat-img" src="" alt="cat image">
     </div>
-
-    <div class= 'catContainer'>
-    <div class= 'catNames'>
-        <h2>List of Cats</h2>
-            <ul id= 'names'>
-                
-            </ul>
-    </div>
-
-    <div class= 'catDisplay'>
-        <h2 id= 'catName'></h2>
-            <img src= "" id='catImage' alt="" onclick= "change()">
-            <p id= 'displayClicks'></p> 
-    </div>
-    </div>
-</div>
-<script src="./js/app.js"></script>
+        
+    <script src="js/app.js"></script>
 </body>
 </html>
